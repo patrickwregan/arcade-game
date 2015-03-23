@@ -65,7 +65,7 @@ var Player = function() {
   */
   this.x = 202;
   this.y = 345;
-  this.speed = 15;
+  this.speed = 100;
   /*
     stay is needed to keep player from moving continously
     since there is no action taken on stay the player does not move
@@ -92,7 +92,7 @@ Player.prototype.update = function(dt) {
     if(this.key_code == 'left') {
 
       // collided with lhs of screen?
-      if(this.x <= 0) {
+      if(this.x <= 10) {
         this.x = 0;
       }
       else
@@ -105,7 +105,7 @@ Player.prototype.update = function(dt) {
     else if(this.key_code == 'right')
     {
       // collided with rhs of screen?
-      if(this.x >= 410) {
+      if(this.x >= 400) {
         this.x = 410;
       }
       else {
@@ -120,7 +120,7 @@ Player.prototype.update = function(dt) {
       // The player never gets to the upper part of the
       // screen due to the water so I don't need to
       // check for a collision here
-      this.y -= this.speed;
+      this.y -= (this.speed - 15);
       this.key_code = 'stay';
     }
     else if(this.key_code == 'down')
@@ -134,7 +134,7 @@ Player.prototype.update = function(dt) {
       }
       else {
 
-        this.y += this.speed;
+        this.y += (this.speed - 15);
       }
       this.key_code = 'stay';
     }
