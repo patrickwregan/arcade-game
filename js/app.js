@@ -24,7 +24,7 @@ var Enemy = function(y) {
     // set the speed of x to a randomly generated number
     // from 60 to 110
     this.speed = Math.floor((Math.random()*6 + 1))*10 + 50;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -42,13 +42,13 @@ Enemy.prototype.update = function(dt) {
       this.speed = Math.floor((Math.random()*6 + 1))*10 + 50;
     }
 
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
 
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -73,7 +73,7 @@ var Player = function() {
   this.key_code = 'stay';
 
   this.powered_up = false; // determines whether player has gotten a heart
-}
+};
 
 Player.prototype.update = function(dt) {
 
@@ -92,11 +92,12 @@ Player.prototype.update = function(dt) {
     if(this.key_code == 'left') {
 
       // collided with lhs of screen?
-      if(!(this.x <= 0))
+      if(this.x <= 0) {
+        this.x = 0;
+      }
+      else
       {
-
         this.x -= this.speed;
-
       }
       this.key_code = 'stay';
 
@@ -104,12 +105,15 @@ Player.prototype.update = function(dt) {
     else if(this.key_code == 'right')
     {
       // collided with rhs of screen?
-      if(!(this.x >= 410))
-      {
+      if(this.x >= 410) {
+        this.x = 410;
+      }
+      else {
 
         this.x += this.speed;
       }
-      this.key_code = 'stay';
+
+        this.key_code = 'stay';
     }
     else if(this.key_code == 'up')
     {
@@ -124,8 +128,11 @@ Player.prototype.update = function(dt) {
       // collided with bottom of screen?
       // note bottom of screen is above
       // score display area
-      if(!(this.y >= 345))
-      {
+      if(this.y >= 345) {
+
+        this.y = 345;
+      }
+      else {
 
         this.y += this.speed;
       }
@@ -136,20 +143,20 @@ Player.prototype.update = function(dt) {
 
       this.key_code = 'stay';
     }
-}
+};
 
 
 Player.prototype.render = function (){
 
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 
 Player.prototype.handleInput = function(key_code)  {
 
 
   this.key_code = key_code;
-}
+};
 
 
 /*
@@ -161,14 +168,14 @@ var Key = function() {
   this.sprite = 'images/Key.png';
   Resources.load(this.sprite);
   this.is_displayed = false;
-}
+};
 
 Key.prototype.update = function(dt)
 {
 
   // noop
 
-}
+};
 
 
 Key.prototype.render = function() {
@@ -177,7 +184,7 @@ Key.prototype.render = function() {
   {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-}
+};
 
 
 // Now instantiate your objects.
